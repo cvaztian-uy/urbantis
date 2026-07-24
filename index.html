@@ -166,10 +166,11 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
 
-    .video-hero iframe {
+    .video-hero video {
       width: 100%;
       height: 100%;
-      border: none;
+      object-fit: cover;
+      display: block;
     }
 
     /* --- SECCIONES REUTILIZABLES --- */
@@ -224,10 +225,11 @@
       background: #000;
     }
 
-    .portfolio-video iframe {
+    .portfolio-video video {
       width: 100%;
       height: 100%;
-      border: none;
+      object-fit: cover;
+      display: block;
     }
 
     .portfolio-info {
@@ -262,7 +264,7 @@
       position: relative;
     }
 
-    .pack-img {
+    .pack-video {
       width: 100%;
       height: 180px;
       object-fit: cover;
@@ -415,7 +417,7 @@
       font-size: 0.85rem;
     }
 
-    /* --- REVELACIÓN AL SCROLL (JS INTERSECTION OBSERVER) --- */
+    /* --- REVELACIÓN AL SCROLL --- */
     .reveal {
       opacity: 0;
       transform: translateY(20px);
@@ -459,7 +461,10 @@
       <p>Renders hiperrealistas y animaciones cinemáticas diseñadas para estudios de arquitectura y desarrollos inmobiliarios.</p>
       
       <div class="video-hero brackets">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Video Principal del Estudio" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <video autoplay loop muted playsinline controls>
+          <source src="videos/muestra-urbano-video.mp4" type="video/mp4">
+          Tu navegador no soporta el formato de video.
+        </video>
       </div>
     </div>
   </section>
@@ -475,66 +480,78 @@
       <!-- Proyecto 1 -->
       <div class="portfolio-card brackets">
         <div class="portfolio-video">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Proyecto Arquitectónico 1" loading="lazy" allowfullscreen></iframe>
+          <video autoplay loop muted playsinline controls>
+            <source src="videos/muestra-urbano-video.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="portfolio-info">
           <h3>Residencia Minimalista</h3>
-          <p>Recorrido exterior con iluminación atardecer.</p>
+          <p>Recorrido exterior urbano con iluminación natural.</p>
         </div>
       </div>
 
       <!-- Proyecto 2 -->
       <div class="portfolio-card brackets">
         <div class="portfolio-video">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Proyecto Arquitectónico 2" loading="lazy" allowfullscreen></iframe>
+          <video autoplay loop muted playsinline controls>
+            <source src="videos/muestra-rural-video.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="portfolio-info">
-          <h3>Complejo Urbano</h3>
-          <p>Animación 3D para desarrollo de departamentos.</p>
+          <h3>Casa de Campo & Entorno Rural</h3>
+          <p>Integración con el paisaje e iluminación natural.</p>
         </div>
       </div>
 
       <!-- Proyecto 3 -->
       <div class="portfolio-card brackets">
         <div class="portfolio-video">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Proyecto Arquitectónico 3" loading="lazy" allowfullscreen></iframe>
+          <video autoplay loop muted playsinline controls>
+            <source src="videos/muestra-edicion-ia-video.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="portfolio-info">
-          <h3>Interiorismo Premium</h3>
-          <p>Detalle de texturas y materiales en áreas sociales.</p>
+          <h3>Edición & Postproducción IA</h3>
+          <p>Mejora de detalles, texturas y estética cinemática.</p>
         </div>
       </div>
 
       <!-- Proyecto 4 -->
       <div class="portfolio-card brackets">
         <div class="portfolio-video">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Proyecto Arquitectónico 4" loading="lazy" allowfullscreen></iframe>
+          <video autoplay loop muted playsinline controls>
+            <source src="videos/muestra-urbano-video.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="portfolio-info">
-          <h3>Casa de Campo</h3>
-          <p>Integración con entorno natural e isopaneles.</p>
+          <h3>Complejo Urbano</h3>
+          <p>Visualización arquitectónica de espacios modernos.</p>
         </div>
       </div>
 
       <!-- Proyecto 5 -->
       <div class="portfolio-card brackets">
         <div class="portfolio-video">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Proyecto Arquitectónico 5" loading="lazy" allowfullscreen></iframe>
+          <video autoplay loop muted playsinline controls>
+            <source src="videos/muestra-rural-video.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="portfolio-info">
-          <h3>Edificio Corporativo</h3>
-          <p>Simulación de iluminación diurna y nocturna.</p>
+          <h3>Proyecto Paisajístico</h3>
+          <p>Modelado de entorno vegetal y luz diurna.</p>
         </div>
       </div>
 
       <!-- Proyecto 6 -->
       <div class="portfolio-card brackets">
         <div class="portfolio-video">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Proyecto Arquitectónico 6" loading="lazy" allowfullscreen></iframe>
+          <video autoplay loop muted playsinline controls>
+            <source src="videos/muestra-edicion-ia-video.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="portfolio-info">
-          <h3>Vista Aérea Drone 3D</h3>
-          <p>Integración de render 3D sobre video real de dron.</p>
+          <h3>Animación Cinemática</h3>
+          <p>Movimiento de cámara fluido y renders de alta definición.</p>
         </div>
       </div>
     </div>
@@ -549,10 +566,12 @@
 
     <div class="packs-grid">
       <div class="pack-card brackets">
-        <img src="images/muestra-urbano.jpg" alt="Render Residencial" class="pack-img">
-        <h3>Residencial</h3>
+        <video class="pack-video" autoplay loop muted playsinline>
+          <source src="videos/muestra-urbano-video.mp4" type="video/mp4">
+        </video>
+        <h3>Residencial Urbano</h3>
         <ul class="pack-features">
-          <li>Imágenes estáticas 4K</li>
+          <li>Animación e imágenes 4K</li>
           <li>Recorrido en video HD</li>
           <li>Modelado desde planos CAD</li>
           <li>Ambientación de exteriores</li>
@@ -560,24 +579,28 @@
       </div>
 
       <div class="pack-card brackets">
-        <img src="images/muestra-rural.jpg" alt="Render Comercial" class="pack-img">
-        <h3>Comercial</h3>
+        <video class="pack-video" autoplay loop muted playsinline>
+          <source src="videos/muestra-rural-video.mp4" type="video/mp4">
+        </video>
+        <h3>Proyectos Rurales</h3>
         <ul class="pack-features">
           <li>Animación cinematográfica</li>
-          <li>Diseño de interiores custom</li>
+          <li>Integración con paisaje natural</li>
           <li>Iluminación fotorrealista</li>
-          <li>Edición y música ambiental</li>
+          <li>Edición y recorrido fluido</li>
         </ul>
       </div>
 
       <div class="pack-card brackets">
-        <img src="images/muestra-interior.jpg" alt="Render Modular" class="pack-img">
-        <h3>Sistemas Modulares</h3>
+        <video class="pack-video" autoplay loop muted playsinline>
+          <source src="videos/muestra-edicion-ia-video.mp4" type="video/mp4">
+        </video>
+        <h3>Postproducción IA</h3>
         <ul class="pack-features">
-          <li>Especial para Steel & Isopanel</li>
-          <li>Despiece visual y componentes</li>
-          <li>Renders para catálogo</li>
-          <li>Entrega optimizada para redes</li>
+          <li>Optimización estética y color</li>
+          <li>Detalles en alta definición</li>
+          <li>Videos optimizados para redes</li>
+          <li>Renderizado rápido y ágil</li>
         </ul>
       </div>
     </div>
@@ -639,7 +662,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2026 Urbantis Labs - Uruguay. Todos los derechos reservados.</p>
+    <p>&copy; 2026 ArchViz - Visualización Arquitectónica. Todos los derechos reservados.</p>
   </footer>
 
   <!-- JAVASCRIPT -->
@@ -652,7 +675,7 @@
       const phone = document.getElementById('phone').value;
       const message = document.getElementById('message').value;
       
-      const emailDestination = "tuemail@dominio.com"; // Cambiá este email por el tuyo
+      const emailDestination = "tuemail@dominio.com";
       const subject = encodeURIComponent("Consulta desde la Web - " + name);
       const body = encodeURIComponent(
         "Nombre: " + name + "\n" +
@@ -663,7 +686,7 @@
       window.location.href = `mailto:${emailDestination}?subject=${subject}&body=${body}`;
     });
 
-    // Animación de aparición suave al scrolear (Intersection Observer)
+    // Animación de aparición suave al scrolear
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
