@@ -1,492 +1,680 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-UY">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>URBANTIS labs — Produccion multimedia + IA para propiedades premium</title>
-<meta name="description" content="Video con drones e Inteligencia Artificial para inmobiliarias de alta gama y campos en Uruguay. Relevamientos, recorridos dinámicos y edición premium.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renders & Animaciones ArchViz</title>
+  
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* --- VARIABLES Y RESET --- */
+    :root {
+      --bg-dark: #0a0c10;
+      --bg-card: #12161f;
+      --bg-card-hover: #1a202c;
+      --accent: #00f2fe;
+      --accent-dim: rgba(0, 242, 254, 0.15);
+      --text-main: #f0f4f8;
+      --text-muted: #94a3b8;
+      --border: #1e293b;
+      --font-title: 'Fraunces', serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
 
-<style>
-  :root{
-    --bg:#0A0E17;
-    --bg-rgb:10,14,23;
-    --bg-alt:#0F1424;
-    --card:#131A2E;
-    --line: rgba(233,230,224,0.10);
-    --line-strong: rgba(233,230,224,0.18);
-    --text:#E9E6DD;
-    --muted:#8892A6;
-    --accent:#8FCFEA;
-    --accent-soft:#B9E3F5;
-    --accent-contrast:#0A0E17;
-    --field-tint-1: rgba(233,230,224,0.035);
-    --field-tint-2: rgba(233,230,224,0.025);
-  }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Inter', sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
+    /* --- NAVEGACIÓN --- */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10, 12, 16, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
+    }
 
-  .font-display{ font-family:'Fraunces', serif; }
-  .font-mono{ font-family:'JetBrains Mono', monospace; }
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-  .text-accent{ color:var(--accent); }
-  .bg-card{ background:var(--card); }
-  .border-line{ border-color:var(--line); }
+    .logo {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
 
-  .grain{
-    position:absolute; inset:0; pointer-events:none;
-    opacity:0.05; mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+    .logo span {
+      color: var(--accent);
+    }
 
-  .brackets{ position:relative; }
-  .brackets::before, .brackets::after,
-  .brackets .bl, .brackets .br{
-    content:''; position:absolute; width:18px; height:18px;
-    border-color:var(--accent); opacity:0.6;
-    transition:opacity .35s ease, width .35s ease, height .35s ease;
-  }
-  .brackets::before{ top:-1px; left:-1px; border-top:1.5px solid; border-left:1.5px solid; }
-  .brackets::after{ top:-1px; right:-1px; border-top:1.5px solid; border-right:1.5px solid; }
-  .brackets .bl{ bottom:-1px; left:-1px; border-bottom:1.5px solid; border-left:1.5px solid; }
-  .brackets .br{ bottom:-1px; right:-1px; border-bottom:1.5px solid; border-right:1.5px solid; }
-  .brackets:hover::before, .brackets:hover::after,
-  .brackets:hover .bl, .brackets:hover .br{ opacity:1; width:24px; height:24px; }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
 
-  .sky-overlay{
-    background:
-      radial-gradient(ellipse 80% 50% at 20% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%),
-      radial-gradient(ellipse 60% 40% at 85% 15%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 60%),
-      linear-gradient(180deg, rgba(var(--bg-rgb),0.55) 0%, rgba(var(--bg-rgb),0.85) 55%, var(--bg) 100%);
-  }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
 
-  .field-lines{
-    background-image:
-      repeating-linear-gradient(115deg, var(--field-tint-1) 0px, var(--field-tint-1) 1px, transparent 1px, transparent 64px),
-      repeating-linear-gradient(25deg, var(--field-tint-2) 0px, var(--field-tint-2) 1px, transparent 1px, transparent 88px);
-  }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
 
-  .dashed-divider{ border-top:1px dashed var(--line-strong); }
+    /* --- HERO SECTION --- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 8rem 2rem 4rem;
+      overflow: hidden;
+    }
 
-  .btn-accent{
-    background:var(--accent);
-    color:var(--accent-contrast);
-    font-weight:600;
-    transition:background .25s ease, transform .25s ease;
-  }
-  .btn-accent:hover{ background:var(--accent-soft); transform:translateY(-1px); }
+    .sky-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 20%, rgba(0, 242, 254, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
 
-  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
-  .reveal.in{ opacity:1; transform:translateY(0); }
+    .field-lines {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(to right, var(--border) 1px, transparent 1px),
+                        linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.15;
+      pointer-events: none;
+    }
 
-  @media (prefers-reduced-motion: reduce){
-    .reveal{ transition:none; opacity:1; transform:none; }
-    html{ scroll-behavior:auto; }
-  }
+    .hero-container {
+      max-width: 1000px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
 
-  .whatsapp-float{ animation:pulse-soft 2.8s ease-in-out infinite; }
-  @keyframes pulse-soft{
-    0%,100%{ box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 35%, transparent); }
-    50%{ box-shadow:0 0 0 10px color-mix(in srgb, var(--accent) 0%, transparent); }
-  }
+    .badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      margin-bottom: 1.5rem;
+    }
 
-  .media-wide{ aspect-ratio:16/9; }
+    h1 {
+      font-family: var(--font-title);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
 
-  .video-responsive{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; }
-  .video-responsive iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto 2.5rem;
+    }
 
-  select, input, textarea{
-    background:var(--bg-alt);
-    border:1px solid var(--line);
-    color:var(--text);
-  }
-  select:focus, input:focus, textarea:focus{
-    outline:none; border-color:var(--accent); box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
-  }
-  ::placeholder{ color:var(--muted); opacity:0.8; }
+    .video-hero {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
 
-  a:focus-visible, button:focus-visible{
-    outline:2px solid var(--accent); outline-offset:2px;
-  }
+    .video-hero iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
 
-  video{ background:#000; }
-</style>
+    /* --- SECCIONES REUTILIZABLES --- */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 4rem;
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      font-weight: 300;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    /* --- PORTFOLIO GRID --- */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .portfolio-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .portfolio-video {
+      aspect-ratio: 16/9;
+      width: 100%;
+      background: #000;
+    }
+
+    .portfolio-video iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .portfolio-info {
+      padding: 1.5rem;
+    }
+
+    .portfolio-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      font-family: var(--font-title);
+    }
+
+    .portfolio-info p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* --- PAQUETES --- */
+    .packs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .pack-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .pack-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .pack-card h3 {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .pack-features {
+      list-style: none;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .pack-features li {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pack-features li::before {
+      content: "—";
+      color: var(--accent);
+    }
+
+    /* --- CARACTERÍSTICAS / POR QUÉ ELEGIRNOS --- */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-item {
+      padding: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .feature-item h4 {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      color: var(--accent);
+    }
+
+    .feature-item p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* --- FORMULARIO DE CONTACTO --- */
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      padding: 2.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent);
+      color: var(--bg-dark);
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      opacity: 0.9;
+    }
+
+    /* --- CORNERS DECORATIVOS (.brackets) --- */
+    .brackets {
+      position: relative;
+    }
+
+    .brackets::before,
+    .brackets::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-color: var(--accent);
+      border-style: solid;
+    }
+
+    .brackets::before {
+      top: -1px;
+      left: -1px;
+      border-width: 1px 0 0 1px;
+    }
+
+    .brackets::after {
+      bottom: -1px;
+      right: -1px;
+      border-width: 0 1px 1px 0;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* --- REVELACIÓN AL SCROLL (JS INTERSECTION OBSERVER) --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
 </head>
+<body>
 
-<body class="antialiased">
-
-<!-- ============ HEADER ============ -->
-<header class="fixed top-0 left-0 right-0 z-50 border-b backdrop-blur" style="border-color:var(--line); background:rgba(var(--bg-rgb),0.82);">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
-    <a href="#top" class="font-display text-xl tracking-wide">
-      URBANTIS <span style="color: var(--accent); font-size: 0.85em; font-weight: 400; text-transform: lowercase;">labs</span>
-    </a>
-
-    <nav class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest">
-      <a href="#servicios" class="hover:opacity-80 transition" style="color:var(--accent)">Servicios</a>
-      <a href="#elegirnos" class="hover:opacity-80 transition" style="color:var(--accent)">Por qué elegirnos</a>
-      <a href="#portfolio" class="hover:opacity-80 transition" style="color:var(--accent)">Portfolio</a>
-      <a href="#contacto" class="hover:opacity-80 transition" style="color:var(--accent)">Contacto</a>
+  <!-- NAVEGACIÓN -->
+  <header>
+    <nav>
+      <a href="#" class="logo">ARCH<span>VIZ</span></a>
+      <ul class="nav-links">
+        <li><a href="#portfolio">Proyectos</a></li>
+        <li><a href="#paquetes">Servicios</a></li>
+        <li><a href="#nosotros">Por qué elegirnos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
     </nav>
+  </header>
 
-    <div class="flex items-center gap-4">
-      <a href="https://wa.me/59896213333?text=Hola%2C%20quiero%20coordinar%20un%20relevamiento%20a%C3%A9reo%20para%20una%20propiedad"
-         target="_blank" rel="noopener"
-         class="hidden md:inline-flex items-center gap-2 btn-accent text-xs font-mono uppercase tracking-widest px-4 py-2 rounded-sm">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.09h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.13.82.84-3.05-.2-.31a8.18 8.18 0 0 1-1.26-4.37c0-4.53 3.69-8.22 8.24-8.22 2.2 0 4.27.86 5.83 2.42a8.17 8.17 0 0 1 2.41 5.81c0 4.54-3.7 8.22-8.24 8.22zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.24-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.24-.86.85-.86 2.06s.88 2.39 1 2.56c.12.16 1.73 2.65 4.2 3.71.59.25 1.05.4 1.4.51.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
-        Escribinos
-      </a>
-
-      <button id="menuBtn" class="md:hidden" style="color:var(--text)" aria-label="Abrir menú">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      </button>
-    </div>
-  </div>
-
-  <div id="mobileMenu" class="hidden md:hidden border-t px-6 py-4 flex flex-col gap-4 font-mono text-xs uppercase tracking-widest" style="border-color:var(--line); background:var(--bg)">
-    <a href="#servicios" style="color:var(--accent)">Servicios</a>
-    <a href="#elegirnos" style="color:var(--accent)">Por qué elegirnos</a>
-    <a href="#portfolio" style="color:var(--accent)">Portfolio</a>
-    <a href="#contacto" style="color:var(--accent)">Contacto</a>
-    <a href="https://wa.me/59896213333" class="btn-accent text-center py-2 rounded-sm mt-2">Escribinos por WhatsApp</a>
-  </div>
-</header>
-
-<!-- ============ HERO ============ -->
-<section id="top" class="relative overflow-hidden field-lines pt-32 pb-20">
-
-  <div class="absolute inset-0 sky-overlay"></div>
-  <div class="grain"></div>
-
-  <div class="relative max-w-6xl mx-auto px-6 lg:px-10">
-    <div class="reveal text-center max-w-3xl mx-auto mb-14">
-      <p class="font-mono text-xs md:text-sm tracking-[0.3em] text-accent uppercase mb-6">
-        Producción multimedia + IA para propiedades premium
-      </p>
-      <h1 class="font-display font-medium leading-[1.05] text-4xl sm:text-5xl md:text-6xl">
-        La propiedad se muestra,<br class="hidden sm:block">
-        <span class="text-accent">el estilo de vida: se vende.</span>
-      </h1>
-      <p class="mt-8 text-base md:text-lg max-w-2xl mx-auto leading-relaxed" style="color:var(--muted)">
-        Video con Drones, Camaras Full HD e Inteligencia Artificial que acelera la venta de propiedades de alta gama y campos en Uruguay —
-        recorridos que un comprador entiende en segundos, no en visitas.
-      </p>
-
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="https://wa.me/59896213333?text=Hola%2C%20quiero%20coordinar%20un%20relevamiento%20a%C3%A9reo%20para%20una%20propiedad"
-           target="_blank" rel="noopener"
-           class="btn-accent inline-flex items-center gap-2 px-7 py-3.5 rounded-sm font-mono text-sm uppercase tracking-widest w-full sm:w-auto justify-center">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.09h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.13.82.84-3.05-.2-.31a8.18 8.18 0 0 1-1.26-4.37c0-4.53 3.69-8.22 8.24-8.22 2.2 0 4.27.86 5.83 2.42a8.17 8.17 0 0 1 2.41 5.81c0 4.54-3.7 8.22-8.24 8.22zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.24-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.24-.86.85-.86 2.06s.88 2.39 1 2.56c.12.16 1.73 2.65 4.2 3.71.59.25 1.05.4 1.4.51.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
-          Coordinar relevamiento
-        </a>
-        <a href="#portfolio" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-sm font-mono text-sm uppercase tracking-widest border transition w-full sm:w-auto justify-center"
-           style="border-color:var(--line); color:var(--muted)">
-          Ver portfolio
-        </a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="sky-overlay"></div>
+    <div class="field-lines"></div>
+    <div class="hero-container">
+      <span class="badge">Visualización Arquitectónica 3D</span>
+      <h1>Transformamos planos en experiencias reales</h1>
+      <p>Renders hiperrealistas y animaciones cinemáticas diseñadas para estudios de arquitectura y desarrollos inmobiliarios.</p>
+      
+      <div class="video-hero brackets">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Video Principal del Estudio" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
+  </section>
 
-    <!-- Contenedor de video horizontal (16:9) responsivo -->
-    <div class="reveal brackets bg-card rounded-sm overflow-hidden border mx-auto" style="border-color:var(--line); max-width:80%;">
-      <span class="bl"></span><span class="br"></span>
-      <div class="video-responsive">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Video institucional URBANTIS labs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SERVICIOS ============ -->
-<section id="servicios" class="relative py-28 px-6 lg:px-10" style="background:var(--bg-alt)">
-  <div class="max-w-7xl mx-auto">
-    <div class="reveal max-w-2xl mb-16">
-      <p class="font-mono text-xs tracking-widest text-accent uppercase mb-3">Servicios</p>
-      <h2 class="font-display text-3xl md:text-4xl font-medium leading-tight">
-        Nuevas formas de mostrar lo que las fotos no pueden.
-      </h2>
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="reveal">
+    <div class="section-header">
+      <h2 class="section-title">Portafolio en Video</h2>
+      <p class="section-desc">Explorá algunos de nuestros recorridos virtuales y animaciones destacadas.</p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6">
-
-      <!-- Pack Urbano -->
-      <div class="brackets bg-card rounded-sm overflow-hidden border transition group" style="border-color:var(--line)">
-        <span class="bl"></span><span class="br"></span>
-        <img src="images/muestra-urbano.jpg" alt="Muestra Pack Urbano & Alta Gama" class="w-full h-44 object-cover">
-        <div class="p-8">
-          <p class="font-mono text-[11px] tracking-widest mb-4" style="color:var(--muted)">PACK — URBANO &amp; ALTA GAMA</p>
-          <h3 class="font-display text-xl mb-3">Urbano &amp; Alta Gama</h3>
-          <p class="text-sm text-accent italic mb-5 leading-relaxed">
-            "Mostramos no solo la casa, sino el estilo de vida y la ubicación privilegiada."
-          </p>
-          <ul class="text-sm space-y-2 leading-relaxed" style="color:var(--muted)">
-            <li>— Recorridos dinámicos de interior a exterior</li>
-            <li>— Detalles de arquitectura y materiales</li>
-            <li>— Entorno, vistas y contexto del barrio</li>
-            <li>— Y más, adaptado a cada propiedad</li>
-          </ul>
+    <div class="portfolio-grid">
+      <!-- Proyecto 1 -->
+      <div class="portfolio-card brackets">
+        <div class="portfolio-video">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Proyecto Arquitectónico 1" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="portfolio-info">
+          <h3>Residencia Minimalista</h3>
+          <p>Recorrido exterior con iluminación atardecer.</p>
         </div>
       </div>
 
-      <!-- Pack Rural -->
-      <div class="brackets bg-card rounded-sm overflow-hidden border transition group" style="border-color:var(--line)">
-        <span class="bl"></span><span class="br"></span>
-        <img src="images/muestra-rural.jpg" alt="Muestra Pack Rural & Campos" class="w-full h-44 object-cover">
-        <div class="p-8">
-          <p class="font-mono text-[11px] tracking-widest mb-4" style="color:var(--muted)">PACK — RURAL &amp; CAMPOS</p>
-          <h3 class="font-display text-xl mb-3">Rural &amp; Campos</h3>
-          <p class="text-sm text-accent italic mb-5 leading-relaxed">
-            "Relevamiento y escala real en 60 segundos, ahorrando visitas innecesarias al comprador."
-          </p>
-          <ul class="text-sm space-y-2 leading-relaxed" style="color:var(--muted)">
-            <li>— Delimitación de linderos y vista panoramica video</li>
-            <li>— Tajamares, montes y accesos</li>
-            <li>— Informacion de superficie real del predio</li>
-            <li>— Ajustes adicionales según el campo</li>
-          </ul>
+      <!-- Proyecto 2 -->
+      <div class="portfolio-card brackets">
+        <div class="portfolio-video">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Proyecto Arquitectónico 2" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="portfolio-info">
+          <h3>Complejo Urbano</h3>
+          <p>Animación 3D para desarrollo de departamentos.</p>
         </div>
       </div>
 
-      <!-- Edición IA -->
-      <div class="brackets bg-card rounded-sm overflow-hidden border transition group" style="border-color:var(--line)">
-        <span class="bl"></span><span class="br"></span>
-        <img src="images/muestra-edicion-ia.jpg" alt="Muestra Pack Edición & IA" class="w-full h-44 object-cover">
-        <div class="p-8">
-          <p class="font-mono text-[11px] tracking-widest mb-4" style="color:var(--muted)">SERVICIO — EDICIÓN &amp; IA</p>
-          <h3 class="font-display text-xl mb-3">Edición &amp; IA</h3>
-          <p class="text-sm text-accent italic mb-5 leading-relaxed">
-            "Mejora de luces y colores, retoque visual del entorno y detalles para potenciar la percepción de valor de la propiedad."
-          </p>
-          <ul class="text-sm space-y-2 leading-relaxed" style="color:var(--muted)">
-            <li>— Mejora de cielos, remocion de mobiliario, efectos  </li>
-            <li>— Limpieza y retoque del entorno</li>
-            <li>— Ajuste de color y detalles generales</li>
-            <li>— Y un arsenal de ideas personalizables</li>
-          </ul>
+      <!-- Proyecto 3 -->
+      <div class="portfolio-card brackets">
+        <div class="portfolio-video">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Proyecto Arquitectónico 3" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="portfolio-info">
+          <h3>Interiorismo Premium</h3>
+          <p>Detalle de texturas y materiales en áreas sociales.</p>
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- ============ POR QUÉ ELEGIRNOS ============ -->
-<section id="elegirnos" class="relative py-28 px-6 lg:px-10 dashed-divider">
-  <div class="max-w-7xl mx-auto">
-    <div class="reveal max-w-2xl mb-16">
-      <p class="font-mono text-xs tracking-widest text-accent uppercase mb-3">Por qué elegirnos</p>
-      <h2 class="font-display text-3xl md:text-4xl font-medium leading-tight">
-        Pensamos, creamos y editamos para vender, no solo para lucir bien.
-      </h2>
-    </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="reveal">
-        <div class="w-9 h-9 mb-4"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.3"><path d="M3 3v18h18M7 15l4-5 3 3 5-7"/></svg></div>
-        <h3 class="font-display text-lg mb-2">Enfoque comercial</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">Cada escena y plano del video está pensado para generar interés real y acortar la decisión de compra.</p>
-      </div>
-      <div class="reveal">
-        <div class="w-9 h-9 mb-4"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <h3 class="font-display text-lg mb-2">Entrega rápida</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">El material queda listo para publicar en el menor tiempo posible, con calidad porfesional real.</p>
-      </div>
-      <div class="reveal">
-        <div class="w-9 h-9 mb-4"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.3"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
-        <h3 class="font-display text-lg mb-2">Vertical y horizontal</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">Videos listos para usar, tanto para presentaciones y web en horizontal, como para reels y estados en formatos verticales.</p>
-      </div>
-      <div class="reveal">
-        <div class="w-9 h-9 mb-4"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.3"><path d="M4 17l5-9 4 6 3-4 4 7"/></svg></div>
-        <h3 class="font-display text-lg mb-2">Tecnología de punta</h3>
-        <p class="text-sm leading-relaxed" style="color:var(--muted)">Drones Profesionales, Camaras Full HD de última generación y postproducción asistida por IA en constante actualizacion.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PORTFOLIO ============ -->
-<section id="portfolio" class="relative py-28 px-6 lg:px-10" style="background:var(--bg-alt)">
-  <div class="max-w-7xl mx-auto">
-    <div class="reveal max-w-2xl mb-16">
-      <p class="font-mono text-xs tracking-widest text-accent uppercase mb-3">Portfolio</p>
-      <h2 class="font-display text-3xl md:text-4xl font-medium leading-tight">
-        Algunas tomas recientes.
-      </h2>
-      <p class="text-sm mt-4" style="color:var(--muted)">
-        Actualizado al 2026.
-      </p>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <div class="brackets bg-card rounded-sm overflow-hidden border" style="border-color:var(--line)">
-        <span class="bl"></span><span class="br"></span>
-        <div class="video-responsive">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Propiedad urbana — Carrasco" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <!-- Proyecto 4 -->
+      <div class="portfolio-card brackets">
+        <div class="portfolio-video">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Proyecto Arquitectónico 4" loading="lazy" allowfullscreen></iframe>
         </div>
-        <p class="font-mono text-[11px] tracking-widest px-4 py-3" style="color:var(--muted)">PROPIEDAD URBANA — CARRASCO</p>
+        <div class="portfolio-info">
+          <h3>Casa de Campo</h3>
+          <p>Integración con entorno natural e isopaneles.</p>
+        </div>
       </div>
 
-      <div class="brackets bg-card rounded-sm overflow-hidden border" style="border-color:var(--line)">
-        <span class="bl"></span><span class="br"></span>
-        <div class="video-responsive">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Campo — Sierras" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <!-- Proyecto 5 -->
+      <div class="portfolio-card brackets">
+        <div class="portfolio-video">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Proyecto Arquitectónico 5" loading="lazy" allowfullscreen></iframe>
         </div>
-        <p class="font-mono text-[11px] tracking-widest px-4 py-3" style="color:var(--muted)">CAMPO — SIERRAS</p>
+        <div class="portfolio-info">
+          <h3>Edificio Corporativo</h3>
+          <p>Simulación de iluminación diurna y nocturna.</p>
+        </div>
       </div>
 
-      <div class="brackets bg-card rounded-sm overflow-hidden border" style="border-color:var(--line)">
-        <span class="bl"></span><span class="br"></span>
-        <div class="video-responsive">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Propiedad urbana — Punta del Este" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <!-- Proyecto 6 -->
+      <div class="portfolio-card brackets">
+        <div class="portfolio-video">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Proyecto Arquitectónico 6" loading="lazy" allowfullscreen></iframe>
         </div>
-        <p class="font-mono text-[11px] tracking-widest px-4 py-3" style="color:var(--muted)">PROPIEDAD URBANA — PUNTA DEL ESTE</p>
-      </div>
-
-      <div class="brackets bg-card rounded-sm overflow-hidden border" style="border-color:var(--line)">
-        <span class="bl"></span><span class="br"></span>
-        <div class="video-responsive">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Campo — Tacuarembó" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p class="font-mono text-[11px] tracking-widest px-4 py-3" style="color:var(--muted)">CAMPO — TACUAREMBÓ</p>
-      </div>
-
-      <div class="brackets bg-card rounded-sm overflow-hidden border" style="border-color:var(--line)">
-        <span class="bl"></span><span class="br"></span>
-        <div class="video-responsive">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Propiedad urbana — José Ignacio" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p class="font-mono text-[11px] tracking-widest px-4 py-3" style="color:var(--muted)">PROPIEDAD URBANA — JOSÉ IGNACIO</p>
-      </div>
-
-      <div class="brackets bg-card rounded-sm overflow-hidden border" style="border-color:var(--line)">
-        <span class="bl"></span><span class="br"></span>
-        <div class="video-responsive">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Campo — Soriano" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p class="font-mono text-[11px] tracking-widest px-4 py-3" style="color:var(--muted)">CAMPO — SORIANO</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============ CONTACTO ============ -->
-<section id="contacto" class="relative py-28 px-6 lg:px-10 dashed-divider">
-  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
-
-    <div class="reveal">
-      <p class="font-mono text-xs tracking-widest text-accent uppercase mb-3">Contacto</p>
-      <h2 class="font-display text-3xl md:text-4xl font-medium leading-tight mb-6">
-        Coordinemos el relevamiento de tu propiedad.
-      </h2>
-      <p class="leading-relaxed mb-10 max-w-md" style="color:var(--muted)">
-        Contanos dónde está la propiedad y qué tipo de material necesitás. Respondemos por WhatsApp o e-mail
-        para coordinar.
-      </p>
-
-      <div class="space-y-5 font-mono text-sm">
-        <div class="flex items-center gap-3" style="color:var(--muted)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" class="flex-shrink-0"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2z"/></svg>
-          +598 96 213333
-        </div>
-        <div class="flex items-center gap-3" style="color:var(--muted)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" class="flex-shrink-0"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-          urbantis.uy@gmail.com
-        </div>
-        <div class="flex items-center gap-3" style="color:var(--muted)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" class="flex-shrink-0"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Uruguay — Cobertura nacional y regional.
+        <div class="portfolio-info">
+          <h3>Vista Aérea Drone 3D</h3>
+          <p>Integración de render 3D sobre video real de dron.</p>
         </div>
       </div>
     </div>
+  </section>
 
-    <form id="contactForm" class="reveal bg-card rounded-sm p-8 space-y-5 border" style="border-color:var(--line)">
-      <div>
-        <label class="font-mono text-[11px] tracking-widest uppercase block mb-2" style="color:var(--muted)">Nombre</label>
-        <input id="f_nombre" type="text" required placeholder="Tu nombre" class="w-full px-4 py-3 rounded-sm text-sm">
+  <!-- PAQUETES / SERVICIOS -->
+  <section id="paquetes" class="reveal">
+    <div class="section-header">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <p class="section-desc">Soluciones a medida para cada etapa de tu proyecto.</p>
+    </div>
+
+    <div class="packs-grid">
+      <div class="pack-card brackets">
+        <img src="images/muestra-urbano.jpg" alt="Render Residencial" class="pack-img">
+        <h3>Residencial</h3>
+        <ul class="pack-features">
+          <li>Imágenes estáticas 4K</li>
+          <li>Recorrido en video HD</li>
+          <li>Modelado desde planos CAD</li>
+          <li>Ambientación de exteriores</li>
+        </ul>
       </div>
-      <div>
-        <label class="font-mono text-[11px] tracking-widest uppercase block mb-2" style="color:var(--muted)">E-mail</label>
-        <input id="f_email" type="email" required placeholder="correo@ejemplo.com" class="w-full px-4 py-3 rounded-sm text-sm">
+
+      <div class="pack-card brackets">
+        <img src="images/muestra-rural.jpg" alt="Render Comercial" class="pack-img">
+        <h3>Comercial</h3>
+        <ul class="pack-features">
+          <li>Animación cinematográfica</li>
+          <li>Diseño de interiores custom</li>
+          <li>Iluminación fotorrealista</li>
+          <li>Edición y música ambiental</li>
+        </ul>
       </div>
-      <div>
-        <label class="font-mono text-[11px] tracking-widest uppercase block mb-2" style="color:var(--muted)">Tipo de propiedad</label>
-        <select id="f_tipo" class="w-full px-4 py-3 rounded-sm text-sm">
-          <option>Urbano / Alta gama</option>
-          <option>Rural / Campo</option>
-          <option>No estoy seguro</option>
-        </select>
+
+      <div class="pack-card brackets">
+        <img src="images/muestra-interior.jpg" alt="Render Modular" class="pack-img">
+        <h3>Sistemas Modulares</h3>
+        <ul class="pack-features">
+          <li>Especial para Steel & Isopanel</li>
+          <li>Despiece visual y componentes</li>
+          <li>Renders para catálogo</li>
+          <li>Entrega optimizada para redes</li>
+        </ul>
       </div>
-      <div>
-        <label class="font-mono text-[11px] tracking-widest uppercase block mb-2" style="color:var(--muted)">Mensaje</label>
-        <textarea id="f_mensaje" rows="4" placeholder=" Tu telefono de contacto, Ubicación de la propiedad, detalles..." class="w-full px-4 py-3 rounded-sm text-sm resize-none"></textarea>
+    </div>
+  </section>
+
+  <!-- POR QUÉ ELEGIRNOS -->
+  <section id="nosotros" class="reveal">
+    <div class="section-header">
+      <h2 class="section-title">Por Qué Elegirnos</h2>
+      <p class="section-desc">Compromiso con la calidad visual y la puntualidad en cada entrega.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-item brackets">
+        <h4>Calidad Fotorrealista</h4>
+        <p>Cuidamos cada detalle de texturas, luz natural y sombras para reflejar fielmente la idea de diseño.</p>
       </div>
-      <button type="submit" class="btn-accent w-full py-3.5 rounded-sm font-mono text-sm uppercase tracking-widest">
-        Enviar consulta por e-mail
-      </button>
-    </form>
 
-  </div>
-</section>
+      <div class="feature-item brackets">
+        <h4>Entrega Rápida</h4>
+        <p>Procesos de renderizado optimizados para cumplir con los plazos comerciales de tu proyecto.</p>
+      </div>
 
-<!-- ============ FOOTER ============ -->
-<footer class="border-t py-10 px-6 lg:px-10" style="border-color:var(--line)">
-  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-    <a href="#top" class="font-display text-lg">
-      URBANTIS <span style="color: var(--accent); font-size: 0.85em; font-weight: 400; text-transform: lowercase;">labs</span>
-    </a>
-    <p class="font-mono text-[11px] tracking-widest text-center" style="color:var(--muted)">
-      Produccion multimedia + IA para propiedades premium · URUGUAY
-    </p>
-  </div>
-</footer>
+      <div class="feature-item brackets">
+        <h4>Atención Personalizada</h4>
+        <p>Acompañamos el proceso desde los primeros bocetos o planos CAD hasta la pieza final.</p>
+      </div>
+    </div>
+  </section>
 
-<!-- ============ WHATSAPP FLOTANTE ============ -->
-<a href="https://wa.me/59896213333?text=Hola%2C%20quiero%20consultar%20por%20un%20video%20con%20drone"
-   target="_blank" rel="noopener"
-   class="whatsapp-float fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg"
-   style="background:var(--accent);"
-   aria-label="Escribinos por WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" style="fill:var(--accent-contrast)"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.09h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.13.82.84-3.05-.2-.31a8.18 8.18 0 0 1-1.26-4.37c0-4.53 3.69-8.22 8.24-8.22 2.2 0 4.27.86 5.83 2.42a8.17 8.17 0 0 1 2.41 5.81c0 4.54-3.7 8.22-8.24 8.22zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.24-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.24-.86.85-.86 2.06s.88 2.39 1 2.56c.12.16 1.73 2.65 4.2 3.71.59.25 1.05.4 1.4.51.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
-</a>
+  <!-- CONTACTO -->
+  <section id="contacto" class="reveal">
+    <div class="section-header">
+      <h2 class="section-title">Contacto</h2>
+      <p class="section-desc">Envianos tu consulta o archivo para recibir un presupuesto.</p>
+    </div>
 
-<script>
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el => io.observe(el));
+    <div class="contact-container brackets">
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">NOMBRE / ESTUDIO</label>
+          <input type="text" id="name" required placeholder="Tu nombre o empresa">
+        </div>
 
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+        <div class="form-group">
+          <label for="phone">TELÉFONO</label>
+          <input type="tel" id="phone" placeholder="Tu teléfono...">
+        </div>
 
-  const form = document.getElementById('contactForm');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const nombre = document.getElementById('f_nombre').value.trim();
-    const email = document.getElementById('f_email').value.trim();
-    const tipo = document.getElementById('f_tipo').value;
-    const mensaje = document.getElementById('f_mensaje').value.trim();
+        <div class="form-group">
+          <label for="message">MENSAJE / DETALLES DEL PROYECTO</label>
+          <textarea id="message" rows="5" required placeholder="Contanos sobre tu proyecto..."></textarea>
+        </div>
 
-    const asunto = encodeURIComponent(`Consulta de ${nombre} — ${tipo}`);
-    const cuerpo = encodeURIComponent(`Nombre: ${nombre}\nE-mail: ${email}\nTipo de propiedad: ${tipo}\n\nMensaje:\n${mensaje || 'Sin detalles adicionales'}`);
-    window.location.href = `mailto:urbantis.uy@gmail.com?subject=${asunto}&body=${cuerpo}`;
-  });
-</script>
+        <button type="submit" class="btn-submit">ENVIAR CONSULTA</button>
+      </form>
+    </div>
+  </section>
 
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Urbantis Labs - Uruguay. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Envío del formulario vía mailto:
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const message = document.getElementById('message').value;
+      
+      const emailDestination = "tuemail@dominio.com"; // Cambiá este email por el tuyo
+      const subject = encodeURIComponent("Consulta desde la Web - " + name);
+      const body = encodeURIComponent(
+        "Nombre: " + name + "\n" +
+        "Teléfono: " + phone + "\n\n" +
+        "Mensaje:\n" + message
+      );
+      
+      window.location.href = `mailto:${emailDestination}?subject=${subject}&body=${body}`;
+    });
+
+    // Animación de aparición suave al scrolear (Intersection Observer)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
