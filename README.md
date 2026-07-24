@@ -1,2 +1,2 @@
 # urbantis
-Urbantis - Producción multimedial + IA para propiedades premium
+Urbantis - Producción multimedia + IA para propiedades premium
